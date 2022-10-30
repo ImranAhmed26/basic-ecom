@@ -5,11 +5,18 @@ export const validToken = (req) => {
   let token;
 
   if (req.headers.cookie) {
-    const tokenCookie = req.headers.cookie.split(";")[0].toString();
-    console.log("Req Headers: ", tokenCookie);
-    token = tokenCookie.split("=")[1];
+    // const tokenCookie = req.headers.cookie.split(";")[0].toString();
+    var match = req.headers.cookie.match(new RegExp("(^| )" + "token" + "=([^;]+)"));
+    if (match) {
+      token = match[2];
+    } else {
+      console.log("--smt went wrong--");
+    }
+    console.log("Req Headers: ", token);
+    // token = tokenCookie.split("=")[1];
     const decoded = jwt.verify(token, process.env.JWT_ACCESS_TOKEN);
     console.log("Token validation successful");
+    // console.log(decoded);
     return decoded;
   } else {
     throw new Error("Not authorized, token failed");

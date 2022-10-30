@@ -4,10 +4,12 @@ import React, { useState, useEffect } from "react";
 import { products } from "../../constants/productDummyData";
 import { GET } from "../../lib/api";
 import ProductCard from "../common/productCard";
+import UserEditModal from "../modal/userEditModal";
 
 const UserList = () => {
   const [visible, setVisible] = useState(false);
   const [data, setData] = useState();
+  const [user, setUser] = useState({});
 
   const handleOpenCard = () => {
     setVisible(true);
@@ -28,29 +30,36 @@ const UserList = () => {
 
   return (
     <div className="lg:px-6 pb-4 mx-2  h-full w-full">
-      <div className="text-2xl font-bold font-sans cursor-default w-full pb-2">Users</div>
+      <div className="text-2xl font-bold font-sans cursor-default w-full pb-6">Users</div>
       <div className="">
         <table className="min-w-full divide-y divide-gray-200 rounded-md">
-          <tr className="w-full bg-gray-700 rounded-md px-2 py-10 text-gray-100">
-            <th className="py-2">Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>type</th>
-          </tr>
-          {data?.map((item, index) => {
-            return (
-              <tr
-                key={index}
-                className="w-full px-6 py-2 text-center hover:bg-slate-200 transition-all duration-150 cursor-pointer"
-                onClick={handleOpenCard}
-              >
-                <td className="py-2">{item.name}</td>
-                <td>{item.email}</td>
-                <td>{item.phone}</td>
-                <td>{item.type}</td>
-              </tr>
-            );
-          })}
+          <thead>
+            <tr className="w-full bg-gray-700 rounded-md px-2 py-10 text-gray-100">
+              <th className="py-2">Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>type</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data?.map((item, index) => {
+              return (
+                <tr
+                  key={index}
+                  className="w-full px-6 py-2 text-center hover:bg-slate-200 transition-all duration-150 cursor-pointer"
+                  onClick={() => {
+                    handleOpenCard();
+                    setUser(item);
+                  }}
+                >
+                  <td className="py-2">{item.name}</td>
+                  <td>{item.email}</td>
+                  <td>{item.phone}</td>
+                  <td>{item.type}</td>
+                </tr>
+              );
+            })}
+          </tbody>
         </table>
       </div>
 
@@ -59,6 +68,7 @@ const UserList = () => {
           Load More
         </div>
       </div> */}
+      <UserEditModal visible={visible} setVisible={setVisible} user={user} />
     </div>
   );
 };

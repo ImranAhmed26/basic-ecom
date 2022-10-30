@@ -52,10 +52,10 @@ export const POST = async (route = "", body = {}) => {
   }
 };
 
-export const PATCH = async (route, body = {}) => {
+export const PUT = async (route, body = {}) => {
   try {
     const apiRoute = `${baseUrl}${route}`;
-    const { data, status } = await axios.patch(apiRoute, body, {
+    const { data, status } = await axios.put(apiRoute, body, {
       credentials: "include",
       withCredentials: true,
       headers: getHeaders(),
@@ -67,9 +67,11 @@ export const PATCH = async (route, body = {}) => {
 };
 
 export const DELETE = async (route) => {
-  apiRoute = `${baseUrl}${route}`;
   try {
+    const apiRoute = `${baseUrl}${route}`;
     const { data, status } = await axios.delete(apiRoute, {
+      credentials: "include",
+      withCredentials: true,
       headers: getHeaders(),
     });
     return { data, status };

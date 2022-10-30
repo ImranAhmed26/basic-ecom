@@ -6,9 +6,7 @@ const ProfileDetails = () => {
   const { state, dispatch } = useContext(Context);
   // console.log(state);
 
-  useEffect(() => {
- 
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <div>
@@ -18,28 +16,20 @@ const ProfileDetails = () => {
             Profile Details
           </div>
 
-          <div className=" cursor-pointer text-base font-medium px-6 py-2 rounded shadow-sm hover:bg-slate-200 hover:scale-105 duration-150 transition-all ">
+          <div className=" cursor-pointer text-base font-medium px-6 py-2 rounded shadow-sm bg-slate-200 hover:scale-105 duration-150 transition-all ">
             {`name: ${state.user?.name}`}
           </div>
 
-          <div className=" cursor-pointer text-base font-medium px-6 py-2 rounded shadow-sm hover:bg-slate-200 hover:scale-105 duration-150 transition-all ">
+          <div className=" cursor-pointer text-base font-medium px-6 py-2 rounded shadow-sm bg-slate-200 hover:scale-105 duration-150 transition-all ">
             {`email: ${state.user?.email}`}
           </div>
 
-          <div className=" cursor-pointer text-base font-medium px-6 py-2 rounded shadow-sm hover:bg-slate-200 hover:scale-105 duration-150 transition-all ">
+          <div className=" cursor-pointer text-base font-medium px-6 py-2 rounded shadow-sm bg-slate-200 hover:scale-105 duration-150 transition-all ">
             {`Phone: ${state.user?.phone}`}
           </div>
 
-          <div className=" cursor-pointer text-base font-medium px-6 py-2 rounded shadow-sm hover:bg-slate-200 hover:scale-105 duration-150 transition-all ">
+          <div className=" cursor-pointer text-base font-medium px-6 py-2 rounded shadow-sm bg-slate-200 hover:scale-105 duration-150 transition-all ">
             {`Type: ${state.user?.type}`}
-          </div>
-
-          <div className=" cursor-pointer text-base font-medium px-6 py-2 rounded shadow-sm hover:bg-slate-200 hover:scale-105 duration-150 transition-all ">
-            {`website: ${state.user?.website}`}
-          </div>
-
-          <div className=" cursor-pointer text-base font-medium px-6 py-2 rounded shadow-sm hover:bg-slate-200 hover:scale-105 duration-150 transition-all ">
-            {`Country: ${state.user?.address.country}`}
           </div>
         </div>
       </div>

@@ -11,7 +11,7 @@ const productSchema = Schema(
       minLength: [3, "Product name is too short"],
       maxLength: [32, "Too many characters"],
     },
-    description: { type: String, required: true, maxLength: [3000, "Way too big"] },
+    description: { type: String, trim: true, required: true, maxLength: [3000, "Way too big"] },
     category: { type: String, trim: "true", required: [true, "Category is required"] },
     unitPrice: { type: Number, required: true, maxLength: [9, "Amount out of line"] },
     quantity: { type: Number },

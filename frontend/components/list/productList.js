@@ -1,39 +1,73 @@
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
+import { GET } from "../../lib/api";
 import { products } from "../../constants/productDummyData";
 import ProductCard from "../common/productCard";
+import ProductEditModal from "../modal/productEditModal";
+import UserEditModal from "../modal/userEditModal";
 
 const ProductList = () => {
   const [visible, setVisible] = useState(false);
+  const [data, setData] = useState();
+  const [user, setUser] = useState({});
 
   const handleOpenCard = () => {
     setVisible(true);
   };
 
+  useEffect(() => {
+    GET("/products").then(({ data, status }) => {
+      if (status !== 200) {
+        console.log(data);
+        console.log(status);
+      } else if (status === 200) {
+        console.log("Login success");
+        console.log(data);
+        setData(data);
+      }
+    });
+  }, []);
+
   return (
-    <div className=" px-10 py- mx-2  w-screen h-full ">
-      <div className="text-2xl font-bold font-sans cursor-default">Shop</div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 place-content-center w-full gap-y-4 gap-x-4 py-4">
-        {products.product.map((item, index) => {
-          return (
-            <div key={index} className=" w-full " onClick={handleOpenCard}>
-              <ProductCard
-                image={item.image}
-                title={item.name}
-                details={item.details}
-                price={`$${item.price}`}
-              />
-            </div>
-          );
-        })}
+    <div className="lg:px-6 pb-4 mx-2  h-full w-full">
+      <div className="text-2xl font-bold font-sans cursor-default w-full pb-6">Users</div>
+      <div className="">
+        <table className="min-w-full divide-y-2 divide-gray-200 rounded-md">
+          <thead>
+            <tr className="w-full bg-gray-700 rounded-md px-2 py-10 text-gray-100">
+              <th className="py-2">Name</th>
+              <th>Description</th>
+              <th>Category</th>
+              <th>Price</th>
+              <th>type</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data?.map((item, index) => {
+              return (
+                <tr
+                  key={index}
+                  className={`w-full px-6 py-2 text-center hover:bg-slate-300 hover:scale-[101%] hover:rounded-md transition-all duration-150 cursor-pointer ${
+                    index % 2 === 0 ? "bg-white" : "bg-slate-200"
+                  }`}
+                  onClick={() => {
+                    handleOpenCard();
+                    setUser(item);
+                  }}
+                >
+                  <td className="py-2">{item.name}</td>
+                  <td className="">{item.description}</td>
+                  <td>{item.category}</td>
+                  <td>{item.unitPrice}</td>
+                  <td>{item.quantity}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       </div>
-      <ProductCard  />
-      <div className="flex justify-center p-5">
-        <div className="px-2 py-2 rounded-md shadow-md w-40 text-center text-lg text-white bg-gray-800 font-semibold cursor-pointer hover:bg-gray-700 duration-100 transition-all">
-          Load More
-        </div>
-      </div>
+      <ProductEditModal visible={visible} setVisible={setVisible} product={user} />
     </div>
   );
 };

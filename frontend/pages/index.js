@@ -1,7 +1,7 @@
 import Head from "next/head";
 
 import Banner from "../components/card/banner";
-import ProductList from "../components/list/productList";
+import ProductGrid from "../components/list/productGrid";
 import SideCategories from "../components/common/sideCategories";
 
 export default function Home() {
@@ -22,7 +22,7 @@ export default function Home() {
           <div className="hidden lg:block">
             <SideCategories />
           </div>
-          <ProductList />
+          <ProductGrid />
         </div>
       </main>
 

@@ -16,7 +16,7 @@ const Users = () => {
   }, []);
 
   return (
-    <div>
+    <div className="h-screen ">
       <Banner>{<div>{`Hello ${state.user?.name}. Welcome to your Dashboard`}</div>}</Banner>
       <div className="mx-4 flex">
         <div className="hidden lg:block">

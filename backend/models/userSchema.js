@@ -42,7 +42,7 @@ const userSchema = Schema(
       type: String,
       required: true,
       default: "user",
-      enum: ["admin", "editor", "user"],
+      // enum: ["admin", "editor", "user"],
     },
     isActive: { type: Boolean, default: true },
   },

@@ -4,13 +4,15 @@ import React, { useEffect, useContext } from "react";
 import Banner from "../../components/card/banner";
 import ProfileDetails from "../../components/common/profileDetails";
 import SideCategories from "../../components/common/sideCategories";
-import ProductList from "../../components/list/productList";
+import SideNav from "../../components/common/sideNav";
+import ProductList from "../../components/list/productGrid";
+import { editorOptions } from "../../constants/sideNavOptions";
 import { Context } from "../../context/authContext";
 
 const EditorDashboardPage = () => {
-  const { state } = useContext(Context);
   const router = useRouter();
-
+  const { state } = useContext(Context);
+  // console.log(state);
   useEffect(() => {
     if (JSON.parse(localStorage.getItem("user")).type !== "editor") router.push("/");
   }, []);
@@ -20,8 +22,9 @@ const EditorDashboardPage = () => {
       <Banner>{`Hello ${state.user?.name}. Welcome to your Dashboard`}</Banner>
       <div className="mx-4 flex">
         <div className="hidden lg:block">
-          <ProfileDetails />
+          <SideNav options={editorOptions} />
         </div>
+          <ProfileDetails />
       </div>
     </div>
   );

@@ -65,12 +65,12 @@ export default function LoginModal({ visible, setVisible }) {
         setIncorrectCreds(true);
       } else if (status === 200) {
         console.log("Login success");
-        console.log(data);
+        // console.log(data.user);
         dispatch({
           type: "LOGIN",
           payload: data,
         });
-
+        // localStorage.setItem("token", JSON.stringify(data.accessToken));
         localStorage.setItem("user", JSON.stringify(data));
         setIncorrectCreds(false);
         setVisible(false);
