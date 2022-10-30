@@ -9,7 +9,7 @@ const RegisterUser = async (req, res) => {
   try {
     // Destructure Req Body
 
-    const { name, email, phone, address, type, password } = req.body;
+    const { name, email, phone, type, password } = req.body;
 
     // Validation
 
@@ -36,7 +36,6 @@ const RegisterUser = async (req, res) => {
       name,
       email,
       phone,
-      address,
       type,
       password: hashedPassword,
     });
@@ -44,7 +43,7 @@ const RegisterUser = async (req, res) => {
     await user.save();
     res.status(200).send(user);
   } catch (error) {
-    res.status(401).json(error);
+    res.status(400).json(error);
     throw error;
   }
 };

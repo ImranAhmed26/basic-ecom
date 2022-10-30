@@ -6,14 +6,19 @@ import { products } from "../../constants/productDummyData";
 import ProductCard from "../common/productCard";
 import ProductEditModal from "../modal/productEditModal";
 import UserEditModal from "../modal/userEditModal";
+import ProductAddModal from "../modal/productAddModal";
 
 const ProductList = () => {
   const [visible, setVisible] = useState(false);
+  const [visible2, setVisible2] = useState(false);
   const [data, setData] = useState();
-  const [user, setUser] = useState({});
+  const [product, setProduct] = useState({});
 
   const handleOpenCard = () => {
     setVisible(true);
+  };
+  const showProductAddModal = () => {
+    setVisible2(true);
   };
 
   useEffect(() => {
@@ -31,7 +36,17 @@ const ProductList = () => {
 
   return (
     <div className="lg:px-6 pb-4 mx-2  h-full w-full">
-      <div className="text-2xl font-bold font-sans cursor-default w-full pb-6">Users</div>
+      <div className="flex justify-between w-full pr-2">
+        <div className="text-2xl font-bold font-sans cursor-default pb-">Products</div>
+        <div
+          className="text-2xl  font-sans px-2 py-1 mb-2 bg-slate-600 hover:bg-slate-700 rounded-md cursor-pointer transition-all duration-150 text-gray-100"
+          onClick={() => {
+            showProductAddModal();
+          }}
+        >
+          Add Products
+        </div>
+      </div>
       <div className="">
         <table className="min-w-full divide-y-2 divide-gray-200 rounded-md">
           <thead>
@@ -53,7 +68,7 @@ const ProductList = () => {
                   }`}
                   onClick={() => {
                     handleOpenCard();
-                    setUser(item);
+                    setProduct(item);
                   }}
                 >
                   <td className="py-2">{item.name}</td>
@@ -67,7 +82,8 @@ const ProductList = () => {
           </tbody>
         </table>
       </div>
-      <ProductEditModal visible={visible} setVisible={setVisible} product={user} />
+      <ProductAddModal visible={visible2} setVisible={setVisible2} />
+      <ProductEditModal visible={visible} setVisible={setVisible} product={product} />
     </div>
   );
 };

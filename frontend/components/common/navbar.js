@@ -64,12 +64,6 @@ const Navbar = () => {
           <SearchBar />
         </div>
         <div className="flex items- justify-end w-3/6 sm:w-2/6 md:w-1/5 pt-2 pl-2 ">
-          {/* <div className="w-12">
-            <HeartIcon className="cursor-pointer w-8" />
-          </div> */}
-          {/* <div className="w-12 flex items-center">
-            <ShoppingBagIcon className="cursor-pointer w-8 text-[#130F49]" />
-          </div> */}
           <div>
             {state.user ? (
               // Username when logged in //

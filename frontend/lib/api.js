@@ -52,6 +52,22 @@ export const POST = async (route = "", body = {}) => {
   }
 };
 
+export const POSTFORM = async (route = "", body = {}) => {
+  try {
+    const apiRoute = `${baseUrl}${route}`;
+    const { data, status } = await axios.post(apiRoute, body, {
+      credentials: "include",
+      withCredentials: true,
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return { data, status };
+  } catch (error) {
+    return handleError(error);
+  }
+};
+
 export const PUT = async (route, body = {}) => {
   try {
     const apiRoute = `${baseUrl}${route}`;

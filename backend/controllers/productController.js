@@ -4,34 +4,46 @@ import _ from "lodash";
 
 import Product from "../models/productSchema.js";
 
-const createProduct = (req, res) => {
-  let form = new formidable.IncomingForm();
-  form.keepExtensions = true;
-  form.parse(req, (error, fields, files) => {
-    if (error) {
-      return res.status(400).json({ error: "image could not be uploaded" });
-    }
-    const { name, description, unitPrice, category, quantity } = fields;
-    if (!name || !description || !unitPrice || !category || !quantity) {
-      return res.status(400).json({ error: "Missing fields. All fields are required." });
-    }
-    let product = new Product(fields);
-    if (files.photo) {
-      if (files.photo) {
-        if (files.photo.size > 512000) {
-          return res.status(400).json({ error: "File size should be below 512 KB" });
-        }
-      }
-      product.photo.data = fs.readFileSync(files.photo.filepath);
-      product.photo.contentType = files.photo.mimetype;
-    }
-    product.save((error, result) => {
-      if (error) {
-        return res.status(400).json({ error: "error saving file" });
-      }
-      res.json(result);
-    });
-  });
+// const createProduct = (req, res) => {
+//   let form = new formidable.IncomingForm();
+//   form.keepExtensions = true;
+//   form.parse(req, (error, fields, files) => {
+//     if (error) {
+//       return res.status(400).json({ error: "image could not be uploaded" });
+//     }
+//     const { name, description, unitPrice, category, quantity } = fields;
+//     if (!name || !description || !unitPrice || !category || !quantity) {
+//       return res.status(400).json({ error: "Missing fields. All fields are required." });
+//     }
+//     let product = new Product(fields);
+//     if (files.photo) {
+//       if (files.photo) {
+//         if (files.photo.size > 512000) {
+//           return res.status(400).json({ error: "File size should be below 512 KB" });
+//         }
+//       }
+//       product.photo.data = fs.readFileSync(files.photo.filepath);
+//       product.photo.contentType = files.photo.mimetype;
+//     }
+//     product.save((error, result) => {
+//       if (error) {
+//         return res.status(400).json({ error: "error saving file" });
+//       }
+//       res.json(result);
+//     });
+//   });
+// };
+
+const createProduct = async (req, res) => {
+  try {
+    const { name, description, unitPrice, category, quantity } = req.body;
+    const product = new Product({ name, description, unitPrice, quantity, category });
+    await product.save();
+    res.status(200).send(product);
+  } catch (error) {
+    res.status(400).json(error);
+    throw error;
+  }
 };
 
 const getProduct = async (req, res) => {

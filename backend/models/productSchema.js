@@ -15,7 +15,7 @@ const productSchema = Schema(
     category: { type: String, trim: "true", required: [true, "Category is required"] },
     unitPrice: { type: Number, required: true, maxLength: [9, "Amount out of line"] },
     quantity: { type: Number },
-    editor: { type: ObjectId, ref: "User", required: true },
+    editor: { type: ObjectId, ref: "User" },
     photo: { data: Buffer, contentType: String },
   },
   { timestamps: true },

@@ -31,13 +31,6 @@ const userSchema = Schema(
       required: true,
       minLength: [6, "Too Small to be secure"],
     },
-    address: {
-      street: String,
-      city: { type: String, required: true },
-      state: { type: String, required: true },
-      country: { type: String, required: true },
-      zip: Number,
-    },
     type: {
       type: String,
       required: true,

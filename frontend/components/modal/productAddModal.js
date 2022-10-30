@@ -1,10 +1,13 @@
+import Image from "next/image";
 import { useRouter } from "next/router";
-import { Fragment, useState, useContext, useEffect } from "react";
+import { Fragment, useState, useContext } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { PUT } from "../../lib/api";
-import { Context } from "../../context/authContext";
 
-export default function UserEditModal({ visible, setVisible, user }) {
+import { Context } from "../../context/authContext";
+import { GET, POST, POSTFORM } from "../../lib/api";
+import Logo from "../../public/assets/logo2.png";
+
+export default function ProductAddModal({ visible, setVisible }) {
   //Context  State
   const { state, dispatch } = useContext(Context);
 
@@ -14,47 +17,30 @@ export default function UserEditModal({ visible, setVisible, user }) {
   const [signInActive, setSignInActive] = useState(true);
   const [incorrectCreds, setIncorrectCreds] = useState(false);
 
-  // login form data
-
-  // Update form data
+  // product add form data
   const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [type, setType] = useState("");
-
-  useEffect(() => {
-    setName(user.name || "");
-    setEmail(user.email || "");
-    setPhone(user.phone || "");
-    setType(user.type || "");
-  }, [user.name, user.email, user.type, user.phone]);
+  const [description, setDescription] = useState("");
+  const [unitPrice, setUnitPrice] = useState("");
+  const [category, setCategory] = useState("");
+  const [quantity, setQuantity] = useState("");
 
   const body = {
     name: name,
-    email: email,
-    phone: phone,
-    type: type,
+    description: description,
+    unitPrice: unitPrice,
+    category: category,
+    quantity: quantity,
   };
 
-  // Reset State
-  function resetState() {
-    setName("");
-    setEmail("");
-    setPhone("");
-    setType("");
-  }
-
-  // Edit API
-  const handlePutRequest = () => {
-    PUT(`/users/${user._id}`, body).then(({ data, status }) => {
+  // POST API
+  const handleAddOProducts = () => {
+    POST("/products/createProduct", body).then(({ data, status }) => {
       if (status !== 200) {
         console.log(data);
         console.log(status);
       } else if (status === 200) {
-        console.log("Update successful");
+        console.log("Registration successful");
         console.log(data);
-        resetState();
-        // setVisible(false);
         location.reload();
       }
     });
@@ -62,6 +48,18 @@ export default function UserEditModal({ visible, setVisible, user }) {
 
   const closeModal = () => {
     setVisible(false);
+    setTimeout(() => {
+      setSignInActive(true);
+    }, 500);
+    setIncorrectCreds(false);
+  };
+
+  const handleActiveForm1 = () => {
+    setSignInActive(false);
+  };
+  const handleActiveForm2 = () => {
+    setSignInActive(true);
+    setSignInActive(true);
   };
 
   return (
@@ -96,75 +94,79 @@ export default function UserEditModal({ visible, setVisible, user }) {
                     as="h3"
                     className="text-2xl leading-6 text-gray-900 text-center pb-4 font-bold"
                   >
-                    Update User
+                    <Image src={Logo} width={50.0} height={68} alt={"logo"} />
                   </Dialog.Title>
 
                   <div>
+                    <div className="text-lg text-gray-500 text-center font-semibold px-4 py-2 w-full rounded-md">
+                      Add Product
+                    </div>
+
                     <div className="mt-2">
                       <input
-                        className="outline-none text-sm text-gray-800 border px-4 py-2 w-full rounded-md "
+                        className="outline-none text-sm text-gray-500 border px-4 py-2 w-full rounded-md "
                         placeholder="Name"
                         type="text"
-                        value={name}
                         onChange={(e) => {
                           setName(e.target.value);
                         }}
                       />
                     </div>
+
                     <div className="mt-2">
                       <input
-                        className="outline-none text-sm text-gray-800 border px-4 py-2 w-full rounded-md"
-                        placeholder="Email ID"
-                        type="email"
-                        value={email}
+                        className="outline-none text-sm text-gray-500 border px-4 py-2 w-full rounded-md"
+                        placeholder="description"
+                        type="text"
                         onChange={(e) => {
-                          setEmail(e.target.value);
+                          setDescription(e.target.value);
                         }}
                       />
                     </div>
                     <div className="mt-2">
                       <input
                         className="outline-none text-sm text-gray-800 border px-4 py-2 w-full rounded-md "
-                        placeholder="Phone"
-                        type="text"
-                        value={phone}
+                        placeholder="UnitPrice"
+                        type="number"
+                        value={unitPrice}
                         onChange={(e) => {
-                          setPhone(e.target.value);
+                          setUnitPrice(e.target.value);
                         }}
                       />
                     </div>
-
+                    <div className="mt-2 ">
+                      <input
+                        className="outline-none text-sm text-gray-800 border px-4 py-2 w-full rounded-md "
+                        placeholder="UnitPrice"
+                        type="number"
+                        value={quantity}
+                        onChange={(e) => {
+                          setQuantity(e.target.value);
+                        }}
+                      />
+                    </div>
                     <div className="mt-2">
                       <input
                         className="outline-none text-sm text-gray-800 border px-4 py-2 w-full rounded-md "
-                        placeholder="User Type"
+                        placeholder="Category"
                         type="text"
-                        value={type}
+                        value={category}
                         onChange={(e) => {
-                          setType(e.target.value);
+                          setCategory(e.target.value);
                         }}
                       />
                     </div>
 
-                    <div className="pt-4">
+                    <div className="mt-4">
                       <button
                         type="button"
-                        className={`cursor-pointer inline-flex justify-center rounded-md border bg-gray-600 px-4 py-2 font-medium text-gray-100 ${
-                          email && name ? "hover:bg-gray-700" : "hover:bg-gray-700"
-                        } w-full transition-all duration-75`}
-                        disabled={!email && !name}
+                        className="inline-flex justify-center rounded-md border bg-gray-600 px-4 py-2 font-medium text-gray-100 hover:bg-gray-700 w-full transition-all duration-75"
                         onClick={(e) => {
                           e.preventDefault();
-                          handlePutRequest();
+                          handleAddOProducts();
                         }}
                       >
-                        Confirm Update
-                      </button>
-                      <button
-                        className={`inline-flex justify-center rounded-md border bg-rose-300 px-4 py-2 font-medium text-gray-800 hover:bg-rose-400 w-full transition-all duration-150`}
-                        onClick={closeModal}
-                      >
-                        Close
+                        Add Product
                       </button>
                     </div>
                   </div>

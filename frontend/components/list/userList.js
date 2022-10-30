@@ -4,15 +4,21 @@ import React, { useState, useEffect } from "react";
 import { products } from "../../constants/productDummyData";
 import { GET } from "../../lib/api";
 import ProductCard from "../common/productCard";
+import RegistrationModal from "../modal/registerModal";
 import UserEditModal from "../modal/userEditModal";
 
 const UserList = () => {
   const [visible, setVisible] = useState(false);
+  const [visible2, setVisible2] = useState(false);
   const [data, setData] = useState();
   const [user, setUser] = useState({});
 
   const handleOpenCard = () => {
     setVisible(true);
+  };
+
+  const showRegistrationModal = () => {
+    setVisible2(true);
   };
 
   useEffect(() => {
@@ -30,7 +36,17 @@ const UserList = () => {
 
   return (
     <div className="lg:px-6 pb-4 mx-2  h-full w-full">
-      <div className="text-2xl font-bold font-sans cursor-default w-full pb-6">Users</div>
+      <div className="flex justify-between w-full pr-2">
+        <div className="text-2xl font-bold font-sans cursor-default pb-">Users</div>
+        <div
+          className="text-2xl  font-sans px-2 py-1 mb-2 bg-slate-600 hover:bg-slate-700 rounded-md cursor-pointer transition-all duration-150 text-gray-100"
+          onClick={() => {
+            showRegistrationModal();
+          }}
+        >
+          Create Users
+        </div>
+      </div>
       <div className="">
         <table className="min-w-full divide-y divide-gray-200 rounded-md">
           <thead>
@@ -62,12 +78,7 @@ const UserList = () => {
           </tbody>
         </table>
       </div>
-
-      {/* <div className="flex justify-center p-5">
-        <div className="px-2 py-2 rounded-md shadow-md w-40 text-center text-lg text-white bg-gray-800 font-semibold cursor-pointer hover:bg-gray-700 duration-100 transition-all">
-          Load More
-        </div>
-      </div> */}
+      <RegistrationModal visible={visible2} setVisible={setVisible2} />
       <UserEditModal visible={visible} setVisible={setVisible} user={user} />
     </div>
   );

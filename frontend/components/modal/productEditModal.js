@@ -1,8 +1,9 @@
 import { Fragment, useState, useContext, useEffect } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 
-import { DELETE, PUT } from "../../lib/api";
 import { Context } from "../../context/authContext";
+import { DELETE, PUT } from "../../lib/api";
+
 
 export default function ProductEditModal({ visible, setVisible, product }) {
   //Context  State
@@ -150,7 +151,7 @@ export default function ProductEditModal({ visible, setVisible, product }) {
                       <input
                         className="outline-none text-sm text-gray-800 border px-4 py-2 w-full rounded-md "
                         placeholder="UnitPrice"
-                        category="text"
+                        category="number"
                         value={unitPrice}
                         onChange={(e) => {
                           setUnitPrice(e.target.value);
@@ -162,7 +163,7 @@ export default function ProductEditModal({ visible, setVisible, product }) {
                       <input
                         className="outline-none text-sm text-gray-800 border px-4 py-2 w-full rounded-md "
                         placeholder="UnitPrice"
-                        category="text"
+                        category="number"
                         value={quantity}
                         onChange={(e) => {
                           setQuantity(e.target.value);
