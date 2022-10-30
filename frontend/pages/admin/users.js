@@ -1,15 +1,13 @@
 import { useRouter } from "next/router";
 import React, { useEffect, useContext } from "react";
-
 import { adminOptions } from "../../constants/sideNavOptions";
+
 import Banner from "../../components/card/banner";
 import { Context } from "../../context/authContext";
-import ProfileDetails from "../../components/common/profileDetails";
-import ProductList from "../../components/list/productList";
-import SideCategories from "../../components/common/sideCategories";
 import SideNav from "../../components/common/sideNav";
+import UserList from "../../components/list/userList";
 
-const UserDashboardPage = () => {
+const Users = () => {
   const router = useRouter();
   const { state } = useContext(Context);
 
@@ -24,9 +22,12 @@ const UserDashboardPage = () => {
         <div className="hidden lg:block">
           <SideNav options={adminOptions} />
         </div>
+        <div className="w-full">
+          <UserList />
+        </div>
       </div>
     </div>
   );
 };
 
-export default UserDashboardPage;
+export default Users;

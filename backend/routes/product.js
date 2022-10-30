@@ -14,7 +14,7 @@ const router = express.Router();
 router
   .post("/createProduct", editorToken, createProduct)
   .get("/", userToken, getProducts)
-  .get("/:id", userToken, getProduct)
+  .get("/:id", adminToken, getProduct)
   .put("/:id", editorToken, updateProduct)
   .delete("/:id", adminToken, deleteProduct);
 

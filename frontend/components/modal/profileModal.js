@@ -21,7 +21,12 @@ const ProfileModal = () => {
   const { state, dispatch } = useContext(Context);
   const router = useRouter();
   const handleClick = (value) => {
-    value === "profile" ? router.push("/user/dashboard") : value === "logout" ? handleLogout() : "";
+    const type = JSON.parse(localStorage.getItem("user")).type;
+    value === "profile"
+      ? router.push(`/${type}/dashboard`)
+      : value === "logout"
+      ? handleLogout()
+      : "";
   };
 
   const handleLogout = () => {

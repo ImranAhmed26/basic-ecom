@@ -22,6 +22,9 @@ const UserDashboardPage = () => {
         <div className="hidden lg:block">
           <ProfileDetails />
         </div>
+        <div>
+          
+        </div>
       </div>
     </div>
   );

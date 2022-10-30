@@ -4,8 +4,10 @@ import User from "../models/userSchema.js";
 export const validToken = (req) => {
   let token;
 
-  if (req.headers.authorization) {
-    token = req.headers.cookie.split("=")[1];
+  if (req.headers.cookie) {
+    const tokenCookie = req.headers.cookie.split(";")[0].toString();
+    console.log("Req Headers: ", tokenCookie);
+    token = tokenCookie.split("=")[1];
     const decoded = jwt.verify(token, process.env.JWT_ACCESS_TOKEN);
     console.log("Token validation successful");
     return decoded;

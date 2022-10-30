@@ -4,7 +4,7 @@ const baseUrl = "http://localhost:4000/api/v1";
 
 const getHeaders = () => ({
   "Content-Type": "application/json",
-  Authorization: `Bearer ${localStorage.getItem("token")}`,
+  // authorization: `Bearer ${localStorage.getItem("token")}`,
 });
 
 const getQueryString = (query = {}) => {

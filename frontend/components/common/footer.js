@@ -17,7 +17,7 @@ const Footer = () => {
         </div>
         <h1 className="font-semibold text-xl text-center">Brand R.</h1>
       </div>
-      <div className="bg-[#1c2431] w-full text-base font-medium text-left px-10 py-8 grid grid-cols-3 xl:grid-cols-5 ">
+      <div className="bg-[#1c2431] w-full text-base font-medium text-left px-10 py-8 grid grid-cols-2 xl:grid-cols-4 gap-6">
         <div className="">
           <div>Social</div>
           <div>Facebook</div>
@@ -27,21 +27,11 @@ const Footer = () => {
 
         <div>
           <div>
-            <Link href="/contact">
-              <a className="hover:text-[#130F49] transition-all duration-75">Contact</a>
-            </Link>
+            <div>Contact</div>
           </div>
-          <div>FAQ & Helps</div>
-          <div>Shipping & Delivery</div>
-          <div>Claim Report</div>
-        </div>
-
-        <div>
           <div>Our Information</div>
-          <div>Privacy policy update</div>
-          <div>Terms & conditions</div>
           <div>Return Policy</div>
-          <div>Site Map</div>
+          <div>Claim Report</div>
         </div>
 
         <div>
