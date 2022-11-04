@@ -1,11 +1,7 @@
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
-
 import { GET } from "../../lib/api";
-import { products } from "../../constants/productDummyData";
-import ProductCard from "../common/productCard";
 import ProductEditModal from "../modal/productEditModal";
-import UserEditModal from "../modal/userEditModal";
 import ProductAddModal from "../modal/productAddModal";
 
 const ProductList = () => {
@@ -47,15 +43,15 @@ const ProductList = () => {
           Add Products
         </div>
       </div>
-      <div className="">
-        <table className="min-w-full divide-y-2 divide-gray-200 rounded-md">
-          <thead>
-            <tr className="w-full bg-gray-700 rounded-md px-2 py-10 text-gray-100">
-              <th className="py-2">Name</th>
-              <th>Description</th>
+      <div className="  p-2">
+        <table className="min-w-full  divide-gray-200  ">
+          <thead className="">
+            <tr className="w-full bg-gray-700   text-gray-100">
+              <th className="py-2  ">Name</th>
+              <th className="max-w-sm">Description</th>
               <th>Category</th>
               <th>Price</th>
-              <th>type</th>
+              <th className="py-2 ">type</th>
             </tr>
           </thead>
           <tbody>
@@ -63,7 +59,7 @@ const ProductList = () => {
               return (
                 <tr
                   key={index}
-                  className={`w-full px-6 py-2 text-center hover:bg-slate-300 hover:scale-[101%] hover:rounded-md transition-all duration-150 cursor-pointer ${
+                  className={`w-full px-6 py-2 text-center  hover:bg-slate-300 hover:scale-[101%] transition-all duration-150 cursor-pointer ${
                     index % 2 === 0 ? "bg-white" : "bg-slate-200"
                   }`}
                   onClick={() => {
@@ -71,11 +67,11 @@ const ProductList = () => {
                     setProduct(item);
                   }}
                 >
-                  <td className="py-2">{item.name}</td>
-                  <td className="">{item.description}</td>
+                  <td className="py-2 ">{item.name}</td>
+                  <td className="max-w-sm">{item.description}</td>
                   <td>{item.category}</td>
                   <td>{item.unitPrice}</td>
-                  <td>{item.quantity}</td>
+                  <td className="pr-2">{item.quantity}</td>
                 </tr>
               );
             })}

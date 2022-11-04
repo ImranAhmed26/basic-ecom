@@ -17,7 +17,7 @@ const SideNav = ({ options }) => {
           {options.sideNavLinks.map((item, index) => {
             return (
               <div
-                className=" cursor-pointer text-base font-medium px-6 py-2 rounded shadow bg-slate-200 hover:bg-slate-300 hover:scale-105 duration-150 transition-all "
+                className=" cursor-pointer text-base font-medium px-6 py-2 rounded-md shadow bg-slate-200 hover:bg-slate-300 hover:scale-105 duration-150 transition-all "
                 onClick={() => {
                   router.push(`${item.link}`);
                 }}

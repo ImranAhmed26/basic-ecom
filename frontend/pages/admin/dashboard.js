@@ -5,8 +5,6 @@ import { adminOptions } from "../../constants/sideNavOptions";
 import Banner from "../../components/card/banner";
 import { Context } from "../../context/authContext";
 import ProfileDetails from "../../components/common/profileDetails";
-import ProductList from "../../components/list/productList";
-import SideCategories from "../../components/common/sideCategories";
 import SideNav from "../../components/common/sideNav";
 
 const AdminDashboardPage = () => {

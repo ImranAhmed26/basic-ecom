@@ -2,12 +2,10 @@ import { useRouter } from "next/router";
 import React, { useEffect, useContext } from "react";
 
 import Banner from "../../components/card/banner";
-import ProfileDetails from "../../components/common/profileDetails";
-import SideCategories from "../../components/common/sideCategories";
-import SideNav from "../../components/common/sideNav";
-import ProductList from "../../components/list/productGrid";
-import { editorOptions } from "../../constants/sideNavOptions";
 import { Context } from "../../context/authContext";
+import { editorOptions } from "../../constants/sideNavOptions";
+import ProfileDetails from "../../components/common/profileDetails";
+import SideNav from "../../components/common/sideNav";
 
 const EditorDashboardPage = () => {
   const router = useRouter();

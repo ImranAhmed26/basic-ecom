@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import React, { useEffect, useContext } from "react";
-import { adminOptions } from "../../constants/sideNavOptions";
+import { editorOptions } from "../../constants/sideNavOptions";
 
 import Banner from "../../components/card/banner";
 import { Context } from "../../context/authContext";
@@ -21,7 +21,7 @@ const Users = () => {
       <Banner>{<div>{`Hello ${state.user?.name}. Welcome to your Dashboard`}</div>}</Banner>
       <div className="mx-4 flex">
         <div className="hidden lg:block">
-          <SideNav options={adminOptions} />
+          <SideNav options={editorOptions} />
         </div>
         <div className="w-full">
           <ProductList />
