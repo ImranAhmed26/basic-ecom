@@ -23,7 +23,11 @@ Run npm run dev
 User Credentials for login:
 
 Admin : 
-email: Radib@hello.com
+email: radib@hello.com
+password: 123123
+
+Editor :
+email: hamin@gmail.com
 password: 123123
 
 User : 
